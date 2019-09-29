@@ -1,0 +1,27 @@
+public class HelloWoeld {
+    //public int[] randm(int[] a) {
+     //   for (int i = 0; i < a.length; i++)
+      //      a[i] = StdRandom.uniform(0, 10);
+   // }
+
+    public static void main(String[] args) {
+        System.out.println("Hello World! \n");
+        int i = 4, j = 5;
+        int[][] a = new int[i][j];
+        for (int l = 0; l < i; l++)
+            for (int k = 0; k < j; k++)
+                a[l][k] = StdRandom.uniform(0, 10);
+        for (int l = 0; l < i; l++) {
+            for (int k = 0; k < j; k++)
+                StdOut.printf("%d ", a[l][k]);
+            StdOut.println();
+        }
+        StdOut.println();
+        for (int l = 0; l < j; l++) {
+            for (int k = 0; k < i; k++)
+                StdOut.printf("%d ", a[k][l]);
+            StdOut.println();
+        }
+
+    }
+}
