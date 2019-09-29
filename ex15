@@ -1,0 +1,28 @@
+public class HelloWoeld {
+
+    public static int[] histogram(int[] a, int M) {
+        int[] b = new int[M];
+        int k = 0;
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < a.length; j++)
+                if (i == a[j])
+                    b[i]++;
+        }
+        return b;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Hello World! \n");
+        int[] a = new int[50];
+        int m = 20;
+        int sum = 0;
+        for (int i = 0; i < a.length; i++)
+            a[i] = StdRandom.uniform(0, 20);
+        int[] c = histogram(a, m);
+        for (int k = 0; k < c.length; k++) {
+            sum += c[k];
+            StdOut.println(c[k]);
+        }
+        StdOut.printf("the sum is %d ", sum);
+    }
+}
