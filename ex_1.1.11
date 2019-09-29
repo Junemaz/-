@@ -1,0 +1,27 @@
+public class HelloWoeld {
+    public static void main(String[] args) {
+        System.out.println("Hello World! \n");
+        //System.out.println((char) ('a' + 4));
+        int i = 5, j = 5;
+        boolean[][] a = new boolean[i][j];
+        for (int k = 0; k < i; k++)
+            for (int r = 0; r < j; r++) {
+                if (StdRandom.uniform(-2, 2) > 0.0)
+                    a[k][r] = true;
+                else a[k][r] = false;
+            }
+        for (int l = 0; l < i; l++)
+            StdOut.printf("  %d ", l);
+        StdOut.println();
+        for (int p = 0; p < i; p++) {
+            StdOut.printf("%d ", p);
+            for (int q = 0; q < j; q++) {
+                if (a[p][q])
+                    StdOut.printf("* ");
+                else
+                    StdOut.printf("  ");
+            }
+            StdOut.println();
+        }
+    }
+}
