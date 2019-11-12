@@ -1,0 +1,32 @@
+public class HelloWoeld {
+
+    public static double shortPoint2D(int N) {
+        double[][] a = new double[N][2];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < 2; j++) {
+                a[i][j] = StdRandom.uniform(0.0, 10.0);
+                StdOut.printf("%10.7f \t", a[i][j]);
+            }
+            StdOut.print('\n');
+        }
+        double delta = N * N, temp = N * N;
+        for (int i = 0; i < N; i++)
+            for (int k = i + 1; k < N; k++) {
+                temp = Math.sqrt((a[i][0] - a[k][0]) * (a[i][0] - a[k][0]) + (a[i][1] - a[k][1]) * (
+                        a[i][1] - a[k][1]));
+                if (temp < delta) {
+                    delta = temp;
+                    StdOut.printf("%d  %d \n", i, k);
+                }
+            }
+        return delta;
+
+    }
+
+    public static void main(String[] args) {
+        int n = StdIn.readInt();
+        double a = shortPoint2D(n);
+        StdOut.printf("%.7f", a);
+
+    }
+}
