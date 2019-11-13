@@ -1,0 +1,64 @@
+public class HelloWoeld {
+    private int N;
+    private int n;
+    private int count;
+    private int max;
+
+    public HelloWoeld(int N, int max) {
+        n = N;
+        this.max = Math.abs(max);
+        this.count = 0;
+        this.N = 0;
+        StdDraw.setXscale(0, n);
+        StdDraw.setYscale(-max, max);
+        StdDraw.setPenRadius(0.01);
+        StdDraw.point(0, 0);
+    }
+
+    public void incount() {
+        if (N + 1 > n) {
+            System.out.println("Operate too much!");
+            return;
+        }
+        if (count + 1 > max) {
+            System.out.println("Exceed the max!");
+            return;
+        }
+        count++;
+        N++;
+        StdDraw.point(N, count);
+    }
+
+    public void decount() {
+        if (N + 1 > n) {
+            System.out.println("Operate too much!");
+            return;
+        }
+        if (count - 1 < -max) {
+            System.out.println("Exceed the max!");
+            return;
+        }
+        count--;
+        N++;
+        StdDraw.point(N, count);
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+
+    public static void main(String[] args) {
+        HelloWoeld test01 = new HelloWoeld(20, 5);
+        for (int i = 0; i < 10; i++) {
+            test01.incount();
+        }
+        for (int i = 0; i < 15; i++) {
+            test01.decount();
+        }
+        for (int i = 0; i < 10; i++) {
+            test01.incount();
+        }
+        System.out.println(test01.getCount());
+    }
+}
