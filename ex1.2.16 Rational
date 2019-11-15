@@ -1,0 +1,87 @@
+public class Rational {
+    private int numerator;
+    private int denominator;
+
+    public Rational(int a, int b) {
+        numerator = a;
+        denominator = b;
+        int gcdab = gcd(numerator, denominator);
+        this.numerator = numerator / gcdab;
+        this.denominator = denominator / gcdab;
+
+    }
+
+    public int gcd(int a, int b) {
+        if (a == 0 || b == 0) {
+            return 1;                     // if denominator or numrator equals to 0 return 1
+        }
+        a = Math.abs(a);
+        b = Math.abs(b);
+        if (a < b) {
+            int t = a;
+            a = b;
+            b = t;
+        }
+        if (a % b == 0) {
+            return b;
+        }
+        else {
+            return gcd(a, a % b);
+        }
+
+    }
+
+
+    public Rational plus(Rational i) {
+        return new Rational(numerator * i.denominator + denominator * i.numerator,
+                            denominator * i.denominator);
+    }
+
+    public Rational minus(Rational i) {
+        return new Rational(numerator * i.denominator - denominator * i.numerator,
+                            denominator * i.denominator);
+    }
+
+    public Rational times(Rational i) {
+        return new Rational(numerator * i.numerator, denominator * i.denominator);
+    }
+
+    public Rational divides(Rational i) {
+        return new Rational(numerator * i.denominator, denominator * i.numerator);
+    }
+
+    public String toString() {
+        if (Math.abs(numerator) % Math.abs(denominator) == 0) {
+            return String.valueOf(numerator / denominator);
+        }
+        else {
+            return numerator + "/" + denominator;
+        }
+    }
+
+    public boolean equals(Object x) {
+        if (this == x) return true;
+        if (x == null) return false;
+        if (this.getClass() != x.getClass()) return false;  //两个对象类不同，返回false
+        Rational that = (Rational) x;
+        if (this.denominator == 0 || that.denominator == 0) return false;
+        if ((this.numerator * that.denominator) == (this.denominator * that.numerator))
+            return true;
+        else return false;
+    }
+
+    public static void main(String[] args) {
+        Rational a = new Rational(2, 8);
+        Rational b = new Rational(1, 2);
+        StdOut.println(a);
+        StdOut.println(b);
+        StdOut.println(a + " + " + b + " = " + a.plus(b));
+        StdOut.println(a + " - " + b + " = " + a.minus(b));
+        StdOut.println(a + " x " + b + " = " + a.times(b));
+        StdOut.println(a + " / " + b + " = " + a.divides(b));
+        //StdOut.println(a.dayOfTheWeek());
+        if (a.equals(b))
+            StdOut.println(a + " Equals To " + b);
+        else StdOut.println(a + " Not Equals To " + b);
+    }
+}
