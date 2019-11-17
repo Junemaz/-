@@ -1,0 +1,67 @@
+public class Stack<Item> //implements Iterable<Item>
+{
+    private Node first;
+    private int N;
+
+    private class Node {
+        Item item;
+        Node next;
+    }
+
+    public boolean isEmpty() {
+        return first == null;
+    }
+
+    public int size() {
+        return N;
+    }
+
+
+    public void push(Item item) {
+        Node oldfirst = first;
+        first = new Node();
+        first.next = oldfirst;
+        first.item = item;
+        N++;
+    }
+
+    public Item pop() {
+        Item item = first.item;
+        first = first.next;
+        N--;
+        return item;
+    }
+/*
+    public Iterator<Item> iterator() {
+        return new ReverseArrayIterator();
+    }
+
+    private class ReverseArrayIterator implements Iterator<Item> {
+        //支持后进先出的迭代
+        private int i = N;
+
+        public boolean hasNext() {
+            return i > 0;
+        }
+
+        public Item next() {
+            return a[--i];
+        }
+
+        public void remove() {
+
+    }
+    */
+
+
+    public static void main(String[] args) {
+        Stack<String> s = new Stack<String>();
+        while (!StdIn.isEmpty()) {
+            String item = StdIn.readString();
+            if (!item.equals("-"))
+                s.push(item);
+            else if (!s.isEmpty()) StdOut.print(s.pop() + " ");
+        }
+        StdOut.println("(" + s.size() + " left on stack)");
+    }
+}
