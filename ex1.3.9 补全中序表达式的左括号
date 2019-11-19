@@ -1,0 +1,94 @@
+public class Stack<Item> //implements Iterable<Item>
+{
+    private Node first;
+    private int N;
+
+    private class Node {
+        Item item;
+        Node next;
+    }
+
+    public boolean isEmpty() {
+        return first == null;
+    }
+
+    public int size() {
+        return N;
+    }
+
+
+    public void push(Item item) {
+        Node oldfirst = first;
+        first = new Node();
+        first.next = oldfirst;
+        first.item = item;
+        N++;
+    }
+
+    public Item pop() {
+        Item item = first.item;
+        first = first.next;
+        N--;
+        return item;
+    }
+/*
+    public Iterator<Item> iterator() {
+        return new ReverseArrayIterator();
+    }
+
+    private class ReverseArrayIterator implements Iterator<Item> {
+        //支持后进先出的迭代
+        private int i = N;
+
+        public boolean hasNext() {
+            return i > 0;
+        }
+
+        public Item next() {
+            return a[--i];
+        }
+
+        public void remove() {
+
+    }
+    */
+
+
+    public static void main(String[] args) {
+        Stack<String> ope = new Stack<String>();
+        //Stack<String> express = new Stack<String>();
+        //Queue<String> ope2 = new Queue<String>();
+        String readitem = StdIn.readString();
+        String[] items = readitem.split("");
+        String[] example = { "+", "-", "*", "/", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
+        for (String item : items) {
+            boolean ss = false;
+            if (item.length() == 1)
+                for (int i = 0; i < 14; i++)
+                    ss = ss || item.equals(example[i]);
+            if (ss)
+                ope.push(item);
+            else if (item.equals(")")) {
+                String temps = ")";
+                for (int i = 0; i < 3; i++)
+                    temps = ope.pop() + temps;
+                temps = "(" + temps;
+                ope.push(temps);
+            }
+            else {
+                StdOut.println("Erroring Input");
+                return;
+            }
+
+
+            //express.push("(");
+
+        }
+        StdOut.print(ope.pop());
+
+    }
+
+}
+
+
+
