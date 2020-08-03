@@ -1,0 +1,74 @@
+#include <iostream>
+using namespace std;
+
+template<typename T>
+class UniquePointer {
+public:
+	using Pointer = T *;
+	using Reference = T &;
+
+	UniquePointer() : ptr_(nullptr){}
+	UniquePointer(Pointer ptr) : ptr_(ptr) {}
+	UniquePointer(UniquePointer&& other)
+		:ptr_(other.ptr_) {
+		other.ptr_ = nullptr;
+	}
+	UniquePointer& operator=(UniquePointer&& other) {
+		ptr_ = other.ptr_;
+		other = nullptr;
+		return *this;
+	}
+
+	UniquePointer(const UniquePointer&) = delete;
+	UniquePointer& operator=(const UniquePointer&) = delete;
+
+	operator bool() {
+		return ptr_;
+	}
+
+	Pointer get() {
+		return ptr_;
+	}
+
+	Reference operator *() {
+		return *ptr_;
+	}
+
+	Pointer operator ->() {
+		return ptr_;
+	}
+
+	void reset(Pointer ptr = nullptr) {
+		if (ptr_) {
+			ptr_ = nullptr;
+		}
+		ptr_ = ptr;
+	}
+
+	~UniquePointer() {
+		if (ptr_) {
+			delete ptr_;
+		}
+	}
+
+private:
+	Pointer ptr_;
+
+};
+
+struct Demo {
+
+	~Demo() {
+		cout << "xigoule" << endl;
+	}
+};
+
+int main() {
+
+	UniquePointer<string> p(new string("Hello world"));
+	if (p) {
+		cout << p->c_str() << endl;
+	}
+
+}
+
